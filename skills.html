@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>Athaya Dwi A - Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE and Edge */
+        }
+
+        *::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, Opera */
+        }
+
+        body {
+            background-color: #2a2a2a;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background: linear-gradient(90deg, #bf40bf 0%, #e94560 100%);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(191, 64, 191, 0.3);
+        }
+
+        .logo {
+            font-size: 2rem;
+            color: white;
+            text-decoration: none;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: rotate(180deg);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            margin-left: 85px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            position: relative;
+            padding: 0.5rem 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: white;
+            left: 0;
+            bottom: 0;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 8px rgba(255,255,255,0.5);
+        }
+
+        .nav-links a:hover {
+            transform: translateY(-2px);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .contact-btn {
+            background: transparent;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border: 2px solid white;
+            border-radius: 25px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(191, 64, 191, 0.3);
+        }
+
+        .contact-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: white;
+            transition: all 0.3s ease;
+            z-index: -1;
+        }
+
+        .contact-btn:hover::before {
+            width: 100%;
+        }
+
+        .contact-btn:hover {
+            color: #bf40bf;
+        }
+
+        .skills-section {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 4rem 2rem;
+            gap: 6rem;
+            margin-top: 60px;
+            opacity: 0;
+            animation: pageEnter 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        @keyframes pageEnter {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .skills-container {
+            position: relative;
+            width: 400px;
+        }
+
+        .connector {
+            position: absolute;
+            top: 180px;
+            left: 200px;
+            transform: translate(-50%, -50%);
+            width: 4px;
+            height: 240px;
+            background: linear-gradient(to bottom, #bf40bf, #e94560);
+            z-index: 1;
+            opacity: 0;
+            animation: connectorAppear 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards,
+                       connectorGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes connectorAppear {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -50%) scaleY(0);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%) scaleY(1);
+            }
+        }
+
+        @keyframes connectorGlow {
+            0% {
+                box-shadow: 0 0 10px rgba(191, 64, 191, 0.5),
+                           0 0 20px rgba(191, 64, 191, 0.3);
+            }
+            50% {
+                box-shadow: 0 0 15px rgba(233, 69, 96, 0.6),
+                           0 0 30px rgba(233, 69, 96, 0.4);
+            }
+            100% {
+                box-shadow: 0 0 10px rgba(191, 64, 191, 0.5),
+                           0 0 20px rgba(191, 64, 191, 0.3);
+            }
+        }
+
+        .skill-card {
+            background: linear-gradient(135deg, #bf40bf 0%, #e94560 100%);
+            border-radius: 25px;
+            padding: 2.5rem;
+            color: white;
+            width: 400px;
+            margin-bottom: 8rem;
+            position: relative;
+            z-index: 5;
+            box-shadow: 0 10px 30px rgba(191, 64, 191, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .skill-card:nth-child(2) {
+            animation: firstCard 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        .skill-card:nth-child(3) {
+            animation: secondCard 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            animation-delay: 0.3s;
+        }
+
+        @keyframes firstCard {
+            from {
+                opacity: 0;
+                transform: translateX(-50px) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0) translateY(0);
+            }
+        }
+
+        @keyframes secondCard {
+            from {
+                opacity: 0;
+                transform: translateX(-50px) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0) translateY(0);
+            }
+        }
+
+        .skill-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(191, 64, 191, 0.4);
+            background: linear-gradient(150deg, #bf40bf 0%, #e94560 100%);
+        }
+
+        .skill-card h3 {
+            transform: translateY(0);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .skill-card p {
+            transform: translateY(0);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.1s;
+        }
+
+        .skill-card:hover h3 {
+            transform: translateY(-3px);
+        }
+
+        .skill-card:hover p {
+            transform: translateY(-2px);
+        }
+
+        .conclusion {
+            color: white;
+            font-size: 1.5rem;
+            max-width: 450px;
+            line-height: 1.6;
+            padding: 2.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateX(50px);
+            animation: conclusionEnter 0.8s ease-out forwards 0.6s,
+                       float 3s ease-in-out infinite 1.4s;
+        }
+
+        .footer {
+            background: linear-gradient(90deg, #bf40bf 0%, #e94560 100%);
+            padding: 1rem;
+            text-align: center;
+            color: white;
+            width: 100%;
+            margin-top: auto;
+        }
+
+        .footer h3 {
+            margin-bottom: 1rem;
+            font-size: 30px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .social-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 40px;
+            transition: transform 0.3s ease;
+        }
+
+        .social-links a:hover {
+            transform: scale(1.2);
+        }
+
+        @keyframes conclusionEnter {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .conclusion:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 40px rgba(191, 64, 191, 0.2);
+        }
+
+        @media (max-width: 1024px) {
+            .skills-section {
+                flex-direction: column;
+                gap: 4rem;
+                padding: 2rem;
+            }
+
+            .conclusion {
+                max-width: 400px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-links {
+                gap: 1rem;
+                margin-left: 20px;
+            }
+
+            .skill-card, .conclusion {
+                width: 100%;
+                padding: 1.5rem;
+            }
+
+            .skills-section {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="/index.html" class="logo">△</a>
+        <div class="nav-links">
+            <a href="/index.html">Home</a>
+            <a href="/about.html">About</a>
+            <a href="/Skills.html">Skill</a>
+            <a href="/portofolio.html">Project</a>
+            <a href="/progskill.html">Programming Language Skills</a>
+        </div>
+    </nav>
+    <section class="skills-section">
+        <div class="skills-container">
+            <div class="connector"></div>
+            <div class="skill-card">
+                <h3>UI/UX Design</h3>
+                <p>Focuses on developing UI/UX designs that are user-centric, balancing comfort and style for best outcomes.</p>
+            </div>
+            <div class="skill-card">
+                <h3>Frontend Development</h3>
+                <p>Build responsive web interfaces with the latest frontend technologies to create fast and interactive user experiences.</p>
+            </div>
+        </div>
+        <div class="conclusion">
+            So in conclusion, I have skills in the frontend field or I am more adept at making the appearance of a website so that it is pleasing to the eye of users.
+        </div>
+    </section>
+
+    <footer class="footer">
+    <h3>Contact Me</h3>
+    <div class="social-links">
+        <a href="https://wa.me/qr/PDVTMNI3D4AHA1" target="_blank" aria-label="WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="https://github.com/Tayo8" target="_blank" aria-label="GitHub">
+            <i class="fab fa-github"></i>
+        </a>
+        <a href="https://www.instagram.com/yasol_gy?igsh=dmtkN3dyeGlvanBn" target="_blank" aria-label="Instagram">
+            <i class="fab fa-instagram"></i>
+        </a>
+    </div>
+</footer>
+    </footer>
+</body>
+</html>

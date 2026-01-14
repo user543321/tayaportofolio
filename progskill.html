@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>Programming Skills</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE and Edge */
+        }
+
+        *::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, Opera */
+        }
+
+        body {
+            background-color: #2a2a2a;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+        }
+
+        .navbar {
+            background: linear-gradient(90deg, #bf40bf 0%, #e94560 100%);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(191, 64, 191, 0.3);
+        }
+
+        .logo {
+            font-size: 2rem;
+            color: white;
+            text-decoration: none;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: rotate(180deg);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            position: relative;
+            padding: 0.5rem 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: white;
+            left: 0;
+            bottom: 0;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 8px rgba(255,255,255,0.5);
+        }
+
+        .nav-links a:hover {
+            transform: translateY(-2px);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .contact-btn {
+            background: transparent;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border: 2px solid white;
+            border-radius: 25px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(191, 64, 191, 0.3);
+        }
+
+        .contact-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: white;
+            transition: all 0.3s ease;
+            z-index: -1;
+        }
+
+        .contact-btn:hover::before {
+            width: 100%;
+        }
+
+        .contact-btn:hover {
+            color: #bf40bf;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 4rem;
+            max-width: 1000px;
+            margin: 120px auto 0;
+            padding: 3rem;
+            position: relative;
+        }
+
+        .skills-grid::before {
+            position: absolute;
+            top: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2.5rem;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(191, 64, 191, 0.5);
+            white-space: nowrap;
+        }
+
+        .skill-item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            transition: all 0.5s ease;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .skill-item:hover {
+            transform: translateY(-15px) scale(1.05);
+            box-shadow: 0 15px 45px rgba(191, 64, 191, 0.2);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .skill-item img {
+            width: 200px;
+            height: 200px;
+            object-fit: contain;
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3));
+            transition: all 0.5s ease;
+        }
+
+        .skill-item:hover img {
+            transform: scale(1.1);
+            filter: drop-shadow(0 8px 25px rgba(191, 64, 191, 0.4));
+        }
+
+        .footer {
+            background: linear-gradient(90deg, #bf40bf 0%, #e94560 100%);
+            padding: 1rem;
+            text-align: center;
+            color: white;
+            width: 100%;
+            margin-top: auto;
+        }
+
+        .footer h3 {
+            margin-bottom: 1rem;
+            font-size: 30px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .social-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 40px;
+            transition: transform 0.3s ease;
+        }
+
+        .social-links a:hover {
+            transform: scale(1.2);
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .skill-item {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .skill-item:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+
+        .skill-item:nth-child(3) {
+            animation-delay: 1s;
+        }
+
+        .skill-item:nth-child(4) {
+            animation-delay: 1.5s;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                padding: 1rem;
+            }
+
+            .skill-item img {
+                width: 150px;
+                height: 150px;
+            }
+
+            .skills-grid::before {
+                font-size: 2rem;
+                top: -50px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="/index.html" class="logo">△</a>
+        <div class="nav-links">
+            <a href="/index.html">Home</a>
+            <a href="/about.html">About</a>
+            <a href="/Skills.html">Skill</a>
+            <a href="/portofolio.html">Project</a>
+            <a href="/progskill.html">Program Language Skills</a>
+        </div>
+    </nav>
+
+    <div class="skills-grid">
+        <div class="skill-item">
+            <img src="img/Laravel-Logo.wine.png" alt="Laravel">
+        </div>
+        <div class="skill-item">
+            <img src="img/php-removebg-preview.png" alt="PHP">
+        </div>
+        <div class="skill-item">
+            <img src="img/css1-removebg-preview.png" alt="CSS3">
+        </div>
+        <div class="skill-item">
+            <img src="img/html-removebg-preview.png" alt="HTML5">
+        </div>
+    </div>
+
+    <footer class="footer">
+    <h3>Contact Me</h3>
+    <div class="social-links">
+        <a href="https://wa.me/qr/PDVTMNI3D4AHA1" target="_blank" aria-label="WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="https://github.com/Tayo8" target="_blank" aria-label="GitHub">
+            <i class="fab fa-github"></i>
+        </a>
+        <a href="https://www.instagram.com/yasol_gy?igsh=dmtkN3dyeGlvanBn" target="_blank" aria-label="Instagram">
+            <i class="fab fa-instagram"></i>
+        </a>
+    </div>
+</footer>
+</body>
+</html>

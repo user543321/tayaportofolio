@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>Athaya Dwi A - Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE and Edge */
+        }
+
+        *::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, Opera */
+        }
+
+        body {
+            background-color: #1a1a1a; /* Menggunakan satu warna solid */
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .navbar {
+            background: linear-gradient(90deg, #bf40bf 0%, #e94560 100%);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(191, 64, 191, 0.3);
+        }
+
+        .logo {
+            font-size: 2rem;
+            color: white;
+            text-decoration: none;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: rotate(180deg);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            margin-left: 85px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            position: relative;
+            padding: 0.5rem 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: white;
+            left: 0;
+            bottom: 0;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 8px rgba(255,255,255,0.5);
+        }
+
+        .nav-links a:hover {
+            transform: translateY(-2px);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .contact-btn {
+            background: transparent;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border: 2px solid white;
+            border-radius: 25px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(191, 64, 191, 0.3);
+        }
+
+        .contact-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: white;
+            transition: all 0.3s ease;
+            z-index: -1;
+        }
+
+        .contact-btn:hover::before {
+            width: 100%;
+        }
+
+        .contact-btn:hover {
+            color: #bf40bf;
+        }
+
+        .portfolio-section {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            margin-top: 60px;
+            position: relative;
+            animation: fadeIn 1s ease-out; /* Tambahkan animasi fadeIn */
+        }
+
+        .portfolio-section::before,
+        .portfolio-section::after {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.3; /* Kurangi opacity */
+            animation: moveGradient 10s infinite alternate;
+        }
+
+        .portfolio-section::before {
+            background: #bf40bf;
+            top: -100px;
+            left: -100px;
+        }
+
+        .portfolio-section::after {
+            background: #e94560;
+            bottom: -100px;
+            right: -100px;
+        }
+
+        @keyframes moveGradient {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-areas: 
+                ". top ."
+                "left . right";
+            gap: 4rem;
+            max-width: 1400px;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .portfolio-card {
+            background: rgba(26, 26, 26, 0.95); /* Sesuaikan dengan warna background */
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            overflow: hidden;
+            width: 400px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            transition: all 0.5s ease;
+            position: relative;
+            animation: slideUp 0.8s ease-out; /* Tambahkan animasi slideUp */
+        }
+
+        .portfolio-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #bf40bf 0%, #e94560 100%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: -1;
+        }
+
+        .portfolio-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(191, 64, 191, 0.3);
+        }
+
+        .portfolio-card:hover::before {
+            opacity: 0.1;
+        }
+
+        .portfolio-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .portfolio-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .portfolio-card-content {
+            padding: 2rem;
+            color: white;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(5px);
+        }
+
+        .portfolio-card-content h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, #bf40bf, #e94560);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            position: relative;
+            display: inline-block;
+        }
+
+        .portfolio-card-content h3::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #bf40bf, #e94560);
+            transition: width 0.5s ease;
+        }
+
+        .portfolio-card:hover .portfolio-card-content h3::after {
+            width: 100%;
+        }
+
+        .portfolio-card-content p {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.5s ease;
+            animation: fadeInUp 1s ease-out 0.3s forwards; /* Tambahkan animasi fadeInUp */
+        }
+
+        .portfolio-card:hover .portfolio-card-content p {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .card-top {
+            grid-area: top;
+            justify-self: center;
+            animation: floatTop 4s ease-in-out infinite;
+        }
+
+        .card-left {
+            grid-area: left;
+            animation: floatLeft 4s ease-in-out infinite;
+        }
+
+        .card-right {
+            grid-area: right;
+            animation: floatRight 4s ease-in-out infinite;
+        }
+
+        .footer {
+            background: linear-gradient(90deg, #bf40bf 0%, #e94560 100%);
+            padding: 1rem;
+            text-align: center;
+            color: white;
+            width: 100%;
+            margin-top: auto;
+        }
+
+        .footer h3 {
+            margin-bottom: 1rem;
+            font-size: 30px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .social-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 40px;
+            transition: transform 0.3s ease;
+        }
+
+        .social-links a:hover {
+            transform: scale(1.2);
+        }
+
+        /* Animasi untuk entrance effects */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes floatTop {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes floatLeft {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes floatRight {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @media (max-width: 1200px) {
+            .portfolio-grid {
+                grid-template-areas: 
+                    "top"
+                    "left"
+                    "right";
+                justify-items: center;
+                gap: 3rem;
+            }
+
+            .portfolio-card {
+                width: 350px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar {
+                padding: 1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                margin-left: 20px;
+            }
+
+            .portfolio-card {
+                width: 300px;
+            }
+
+            .portfolio-card img {
+                height: 200px;
+            }
+
+            .portfolio-card-content h3 {
+                font-size: 1.5rem;
+            }
+
+            .portfolio-card-content p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="/index.html" class="logo">△</a>
+        <div class="nav-links">
+            <a href="/index.html">Home</a>
+            <a href="/about.html">About</a>
+            <a href="/Skills.html">Skill</a>
+            <a href="/portofolio.html">Project</a>
+            <a href="/progskill.html">Programming Language Skills</a>
+        </div>
+    </nav>
+    <section class="portfolio-section">
+        <div class="portfolio-grid">
+            <div class="portfolio-card card-top">
+                <img src="img/landingpage.png" alt="Project JagoolT">
+                <div class="portfolio-card-content">
+                    <h3>Project JagoolT</h3>
+                    <p>Create a website for registration</p>
+                </div>
+            </div>
+            <div class="portfolio-card card-left">
+                <img src="img/traveltrip.png" alt="Travel Website">
+                <div class="portfolio-card-content">
+                    <h3>Travel Website</h3>
+                    <p>The website that helps people who want to trip</p>
+                </div>
+            </div>
+            <div class="portfolio-card card-right">
+                <img src="img/fourlix.png" alt="Cinema Website">
+                <div class="portfolio-card-content">
+                    <h3>Cinema Website</h3>
+                    <p>Cinema website that informs you about films now playing and on going</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+    <h3>Contact Me</h3>
+    <div class="social-links">
+        <a href="https://wa.me/qr/PDVTMNI3D4AHA1" target="_blank" aria-label="WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="https://github.com/Tayo8" target="_blank" aria-label="GitHub">
+            <i class="fab fa-github"></i>
+        </a>
+        <a href="https://www.instagram.com/yasol_gy?igsh=dmtkN3dyeGlvanBn" target="_blank" aria-label="Instagram">
+            <i class="fab fa-instagram"></i>
+        </a>
+    </div>
+</footer>
+</body>
+</html>
